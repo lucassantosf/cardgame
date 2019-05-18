@@ -13,8 +13,11 @@ Route::post('/configs', 'GameController@store');
 Route::post('/configs/edit', 'GameController@edit');
 
 Route::get('/cards', 'CardController@index');  
+Route::get('/cardPhoto/{id}/download', 'CardController@download');  
 Route::get('/cards/form', 'CardController@create');  
 Route::get('/cards/form/{id}/edit', 'CardController@edit'); 
 Route::post('/cards/form', 'CardController@store'); 
 Route::post('/cards/form/{id}/update', 'CardController@update'); 
 Route::delete('/cards/{id}/destroy', 'CardController@destroy');
+
+Route::get('/preview', 'GameController@indexPreview');

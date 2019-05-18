@@ -35,7 +35,7 @@
                         <a class="nav-link" href="/cards">Cards</a> 
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/cards">Preview</a> 
+                        <a class="nav-link" href="/preview">Preview</a> 
                     </li>
                 </ul> 
                 @endguest
@@ -86,5 +86,8 @@
             @yield('content')
         </main>
     </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">        
+    </script> 
+        @yield('javascript') 
 </body>
 </html>

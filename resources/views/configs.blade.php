@@ -11,15 +11,15 @@
                             @csrf
                             <div class="form-group text-left">
                                 <label for="name">Nome do Jogo</label>
-                                <input type="text" class="form-control" id="name" name="name" value="@if(count($data)>0) {{$data[0]->name}} @endif">
+                                <input type="text" class="form-control" id="name" name="name" value="{{@old('name')}}@if(count($data)>0) {{$data[0]->name}}@endif">
                             </div>
                             <div class="form-group text-left">
                                 <label for="description">Frase</label>
-                                <input type="text" class="form-control" id="phrase" name="phrase" value="@if(count($data)>0) {{$data[0]->name}} @endif">
+                                <input type="text" class="form-control" id="phrase" name="phrase" value="{{@old('phrase')}}@if(count($data)>0) {{$data[0]->name}} @endif">
                             </div> 
                             <div class="form-group text-left">
                                 <label for="description">Descrição para formulário</label>
-                                <input type="text" class="form-control" id="description_form" name="description_form" value="@if(count($data)>0) {{$data[0]->description_form}} @endif">
+                                <input type="text" class="form-control" id="description_form" name="description_form" value="{{@old('description_form')}}@if(count($data)>0) {{$data[0]->description_form}} @endif">
                             </div> 
                             <div class="form-group custom-file"> 
                                 <input type="hidden" name="img_back" value="@if(count($data)>0){{$data[0]->image_background_url}}@endif"> 

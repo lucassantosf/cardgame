@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Card;
 
-class CardController extends Controller{   
+class CardController extends Controller{
     //Proteger com middleware Auth
     public function __construct(){
         $this->middleware('auth');
     }
-    
+
     //Exibir listagem Cards
     public function index(){
         $i = 0;
@@ -34,20 +34,27 @@ class CardController extends Controller{
             'file_url' => 'required',
         ];
         $mensagens = [
-            'name.required'=>'Escolha um nome para o personagem', 
-            'name.max'=>'Nome do personagem não pode ser maior que 20 caracteres', 
-            'description.max'=>'Descrição não pode ser maior que 100 caracteres', 
-            'description.required'=>'Descreva o personagem', 
-            'file_url.required'=>'Indique a imagem do personagem', 
+            'name.required'=>'Escolha um nome para o personagem',
+            'name.max'=>'Nome do personagem não pode ser maior que 20 caracteres',
+            'description.max'=>'Descrição não pode ser maior que 100 caracteres',
+            'description.required'=>'Descreva o personagem',
+            'file_url.required'=>'Indique a imagem do personagem',
         ];
-        $request->validate($regras,$mensagens);   
+        $request->validate($regras,$mensagens);
         $card = new Card();
         $card->name = $request->input('name');
         $card->description = $request->input('description');
-        $path = $request->file('file_url')->store('images','public');
-        $card->file_url = $path;
+
+        if($request->hasFile('file_url')){
+            $file = $request->file('file_url');
+            $file_name = time().'-'.$file->getClientOriginalName();
+            $file_path = 'uploads/';
+            $file->move($file_path, $file_name);
+            $card->file_url = $file_name;
+        }
+
         $card->save();
-        return redirect('/cards'); 
+        return redirect('/cards');
     }
 
     //Exibir form com dados do card para edição
@@ -66,22 +73,21 @@ class CardController extends Controller{
             //Validação do form
             $regras = [
                 'name' => 'required|max:255',
-                'description' => 'required', 
+                'description' => 'required',
             ];
             $mensagens = [
-                'name.required'=>'Escolha um nome para o personagem', 
-                'description.required'=>'Descreva o personagem',   
+                'name.required'=>'Escolha um nome para o personagem',
+                'description.required'=>'Descreva o personagem',
             ];
-            $request->validate($regras,$mensagens); 
+            $request->validate($regras,$mensagens);
             $card->name = $request->input('name');
             $card->description = $request->input('description');
-            if($request->file('file_url')){
-                //apagar arquivo existente
-                $file = $card->file_url;
-                Storage::disk('public')->delete($file);
-                //salvar novo arquivo
-                $path = $request->file('file_url')->store('images','public');
-                $card->file_url = $path; 
+            if($request->hasFile('file_url')){
+                $file = $request->file('file_url');
+                $file_name = time().'-'.$file->getClientOriginalName();
+                $file_path = 'uploads/';
+                $file->move($file_path, $file_name);
+                $card->file_url = $file_name;
             }
             $card->save();
         }
@@ -89,7 +95,7 @@ class CardController extends Controller{
     }
 
     //Apagar card e sua foto no storage
-    public function destroy($id){ 
+    public function destroy($id){
         $card = Card::find($id);
         if (isset($card)) {
             $file = $card->file_url;
@@ -99,7 +105,7 @@ class CardController extends Controller{
         return redirect('/cards');
     }
 
-    //Download da foto Card
+    //Download da foto Card from Storage - Método não mais usado
     public function download($id){
         $card = Card::find($id);
         if (isset($card)) {
@@ -108,4 +114,4 @@ class CardController extends Controller{
         }
         return redirect('/cards');
     }
-}  
+}

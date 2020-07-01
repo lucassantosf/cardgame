@@ -22,29 +22,29 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container"> 
+            <div class="container">
                 @guest
-                    <a href="/" class="navbar-brand">CardGame</a>
+                    <a href="{{route('home')}}" class="navbar-brand">CardGame</a>
                 @else
                 <ul class="navbar-nav mr-auto">
-                    <a href="/home" class="navbar-brand">Home</a> 
+                    <a href="{{route('home')}}" class="navbar-brand">Home</a>
                     <li class="nav-item">
-                        <a class="nav-link" href="/configs">Configurações</a> 
+                        <a class="nav-link" href="{{route('configs')}}">Configurações</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/cards">Cards</a> 
+                        <a class="nav-link" href="{{route('cards')}}">Cards</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/preview">Preview</a> 
+                        <a class="nav-link" href="{{route('preview')}}">Preview</a>
                     </li>
-                </ul> 
+                </ul>
                 @endguest
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
-                </button> 
+                </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto"> 
+                    <ul class="navbar-nav mr-auto">
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -81,13 +81,13 @@
                     </ul>
                 </div>
             </div>
-        </nav> 
+        </nav>
         <main class="py-4">
             @yield('content')
         </main>
     </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">        
-    </script> 
-        @yield('javascript') 
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+    </script>
+        @yield('javascript')
 </body>
 </html>

@@ -11,15 +11,15 @@
                             @csrf
                             <div class="form-group text-left">
                                 <label for="name">Nome do Jogo</label>
-                                <input type="text" class="form-control" name="name" value="{{old('name',$data->name)}}">
+                                <input type="text" class="form-control" name="name" value="{{old('name',!empty($data) ? $data->name : '')}}">
                             </div>
                             <div class="form-group text-left">
                                 <label for="description">Frase</label>
-                                <input type="text" class="form-control" name="phrase" value="{{old('phrase',$data->phrase)}}">
+                                <input type="text" class="form-control" name="phrase" value="{{old('phrase',!empty($data) ? $data->phrase: '')}}">
                             </div>
                             <div class="form-group text-left">
                                 <label for="description">Descrição para formulário</label>
-                                <input type="text" class="form-control" name="description_form" value="{{old('description_form',$data->description_form)}}">
+                                <input type="text" class="form-control" name="description_form" value="{{old('description_form',!empty($data) ? $data->description_form: '')}}">
                             </div>
                             <div class="form-group custom-file">
                                 <input type="file" class="custom-file-input" name="image_background_url">

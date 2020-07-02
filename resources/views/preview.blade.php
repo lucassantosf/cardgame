@@ -7,7 +7,7 @@
 		}
 		#section1{
             height: 500px;
-            background-image: url("{{url('/uploads/'.$data->image_background_url)}}");
+            background-image: @if(!empty($data)) url("{{url('/uploads/'.$data->image_background_url)}}")  @else url("https://via.placeholder.com/350x350") @endif;
             background-position: center top;
             background-size: 100% auto;
 		}
